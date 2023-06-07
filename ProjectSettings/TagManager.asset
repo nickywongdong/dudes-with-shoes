@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - EndObjective
+  - Enemy
+  - LeftArm
+  - RightArm
+  - Room
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -11,11 +17,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Post Processing
+  - Interactable
   - 
   - 
   - 
-  - whatIsGround
+  - 
   - 
   - 
   - 
