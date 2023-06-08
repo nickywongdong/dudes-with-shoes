@@ -5,9 +5,6 @@
         "name": {
             "value": "dudes-with-shoes-rg"
         },
-        "location": {
-            "value": "westus3"
-        },
         "branch": {
             "value": "master"
         }
