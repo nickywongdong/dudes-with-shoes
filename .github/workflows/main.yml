@@ -73,19 +73,12 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - name: Azure CLI script
-        uses: azure/CLI@v1
-        with:
-          azcliversion: latest
-          inlineScript: |
-            az account show
-            az group list
       - name: Deploy Infrastructure
         uses: azure/arm-deploy@v1
         id: deploy
         with:
           scope: subscription
-          region: westus3
+          region: westus2
           deploymentName: dep-resourceGroup-${{ github.run_id }}
           template: ./infra/resourceGroup.bicep
           parameters: './infra/parameters.json repositoryUrl=${{ env.REPOSITORY_URL }} deploymentId=${{ github.run_id }} webAppName=${{ env.WEB_APP_NAME }}'
