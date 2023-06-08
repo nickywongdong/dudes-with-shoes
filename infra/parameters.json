@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "value": "dudes-with-shoes-rg"
+            "value": "dudes-with-shoes-rg-CI"
         },
         "branch": {
             "value": "master"
