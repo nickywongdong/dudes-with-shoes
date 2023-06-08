@@ -23,44 +23,44 @@ permissions:
   pull-requests: write
   
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: Build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          lfs: true
+  # build:
+  #   runs-on: ubuntu-latest
+  #   name: Build
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         lfs: true
 
-      - name: Cache Unity resources
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.SOURCE_LOCATION }}/Library
-          key: Library-${{ hashFiles('${{ env.SOURCE_LOCATION }}/Assets/**', '${{ env.SOURCE_LOCATION }}/Packages/**', '${{ env.SOURCE_LOCATION }}/ProjectSettings/**') }}
-          restore-keys: |
-            Library-
+  #     - name: Cache Unity resources
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: ${{ env.SOURCE_LOCATION }}/Library
+  #         key: Library-${{ hashFiles('${{ env.SOURCE_LOCATION }}/Assets/**', '${{ env.SOURCE_LOCATION }}/Packages/**', '${{ env.SOURCE_LOCATION }}/ProjectSettings/**') }}
+  #         restore-keys: |
+  #           Library-
 
-      - name: Build project ✨
-        uses: game-ci/unity-builder@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          targetPlatform: WebGL
-          projectPath: ${{ env.SOURCE_LOCATION }}
-          allowDirtyBuild: true
+  #     - name: Build project ✨
+  #       uses: game-ci/unity-builder@v2
+  #       env:
+  #         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  #         UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  #         UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+  #       with:
+  #         targetPlatform: WebGL
+  #         projectPath: ${{ env.SOURCE_LOCATION }}
+  #         allowDirtyBuild: true
 
-      - name: Publish build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Build
-          path: build
-          if-no-files-found: error
+  #     - name: Publish build artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: Build
+  #         path: build
+  #         if-no-files-found: error
   infrastructure:
     runs-on: ubuntu-latest
     name: Deploy Infrastructure
-    needs: build
+    #needs: build
     env:
       REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
     steps:
@@ -73,6 +73,13 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
+            az group list
       - name: Deploy Infrastructure
         uses: azure/arm-deploy@v1
         id: deploy
