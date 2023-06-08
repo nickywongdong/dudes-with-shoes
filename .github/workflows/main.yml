@@ -5,6 +5,7 @@ name: Deploy WebGL to Azure 😎
 env:
   SOURCE_LOCATION: './src' # location of your client code
   RESOURCE_GROUP_NAME: 'dudes-with-shoes-rg' # resource group to deploy infrastructure
+  DEPLOYMENT_LOCATION: 'westus2'
   WEB_APP_NAME: 'dudes-with-shoes-demo' # name of static web app resource to deploy
   
 on:
@@ -78,10 +79,10 @@ jobs:
         id: deploy
         with:
           scope: subscription
-          region: westus2
+          region: ${{env.DEPLOYMENT_LOCATION}}
           deploymentName: dep-resourceGroup-${{ github.run_id }}
           template: ./infra/resourceGroup.bicep
-          parameters: './infra/parameters.json repositoryUrl=${{ env.REPOSITORY_URL }} deploymentId=${{ github.run_id }} webAppName=${{ env.WEB_APP_NAME }}'
+          parameters: './infra/parameters.json location=${{env.DEPLOYMENT_LOCATION}} repositoryUrl=${{ env.REPOSITORY_URL }} deploymentId=${{ github.run_id }} webAppName=${{ env.WEB_APP_NAME }}'
           failOnStdErr: false
   deploy:
     runs-on: ubuntu-latest
