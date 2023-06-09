@@ -37,7 +37,6 @@ module customDomain 'staticSiteCustomDomain.bicep' = {
   name: 'custom-domain-${deploymentId}'
   scope: rg
   params: {
-    location: rg.location
     zoneName: zoneName
     staticWebAppResourceName: webAppName
   }
