@@ -1,14 +1,12 @@
 targetScope = 'resourceGroup'
 
 param zoneName string
-param location string = resourceGroup().location
 param staticWebAppResourceName string
 
-resource swa 'Microsoft.Web/staticSites@2022-03-01' = {
+resource swa 'Microsoft.Web/staticSites@2022-03-01' existing = {
   name: staticWebAppResourceName
-  location: location
+}
 
-  resource symbolicname 'customDomains@2022-03-01' = {
-    name: 'www.${zoneName}'
-  }
+resource symbolicname 'Microsoft.Web/staticSites/customDomains@2022-03-01' = {
+  name: 'www.${zoneName}'
 }
