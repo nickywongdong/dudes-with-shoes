@@ -21,7 +21,6 @@ module app 'staticWebApp.bicep' = {
     location: rg.location
     repositoryUrl: repositoryUrl
     branch: branch
-    zoneName: zoneName
   }
 }
 
