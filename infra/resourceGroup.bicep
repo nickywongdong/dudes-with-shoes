@@ -38,6 +38,5 @@ module customDomain 'staticSiteCustomDomain.bicep' = {
   scope: rg
   params: {
     zoneName: zoneName
-    staticWebAppResourceName: webAppName
   }
 }
