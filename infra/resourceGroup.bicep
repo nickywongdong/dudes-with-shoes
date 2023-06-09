@@ -6,6 +6,7 @@ param repositoryUrl string
 param webAppName string
 param deploymentId string = utcNow()
 param branch string
+param zoneName string
 
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: resourceGroupName
@@ -20,5 +21,15 @@ module app 'staticWebApp.bicep' = {
     location: rg.location
     repositoryUrl: repositoryUrl
     branch: branch
+    zoneName: zoneName
+  }
+}
+
+module dnsZone 'dnsZone.bicep' = {
+  name: 'dep-dnsZone-${deploymentId}'
+  scope: rg
+  params: {
+    zoneName: zoneName
+    staticWebAppHostName: app.outputs.staticWebAppHostName
   }
 }

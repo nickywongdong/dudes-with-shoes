@@ -7,6 +7,7 @@ env:
   RESOURCE_GROUP_NAME: 'dudes-with-shoes-rg-CI' # resource group to deploy infrastructure
   DEPLOYMENT_LOCATION: 'westus2'
   WEB_APP_NAME: 'Ambrose-Vs-V8' # name of static web app resource to deploy
+  DNS_ZONE_NAME: 'dudes-with-shoes.com'
   
 on:
   push:
@@ -81,7 +82,13 @@ jobs:
           region: ${{env.DEPLOYMENT_LOCATION}}
           deploymentName: dep-resourceGroup-${{ github.run_id }}
           template: ./infra/resourceGroup.bicep
-          parameters: './infra/parameters.json resourceGroupName=${{env.RESOURCE_GROUP_NAME}} location=${{env.DEPLOYMENT_LOCATION}} repositoryUrl=${{ env.REPOSITORY_URL }} deploymentId=${{ github.run_id }} webAppName=${{ env.WEB_APP_NAME }}'
+          parameters: './infra/parameters.json >
+            resourceGroupName=${{env.RESOURCE_GROUP_NAME}} >
+            location=${{env.DEPLOYMENT_LOCATION}} >
+            repositoryUrl=${{ env.REPOSITORY_URL }} >
+            deploymentId=${{ github.run_id }} >
+            webAppName=${{ env.WEB_APP_NAME }} >
+            zoneName=${{ env.DNS_ZONE_NAME }}'
           failOnStdErr: false
   deploy:
     runs-on: ubuntu-latest
