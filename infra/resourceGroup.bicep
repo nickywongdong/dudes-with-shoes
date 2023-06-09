@@ -32,3 +32,13 @@ module dnsZone 'dnsZone.bicep' = {
     staticWebAppHostName: app.outputs.staticWebAppHostName
   }
 }
+
+module customDomain 'staticSiteCustomDomain.bicep' = {
+  name: 'custom-domain-${deploymentId}'
+  scope: rg
+  params: {
+    location: rg.location
+    zoneName: zoneName
+    staticWebAppResourceName: webAppName
+  }
+}

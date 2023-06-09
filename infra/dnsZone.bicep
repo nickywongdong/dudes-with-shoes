@@ -18,7 +18,3 @@ resource record 'Microsoft.Network/dnsZones/CNAME@2018-05-01' = {
     }
   }
 }
-
-resource symbolicname 'Microsoft.Web/staticSites/customDomains@2022-03-01' = {
-  name: 'www.${zoneName}'
-}
