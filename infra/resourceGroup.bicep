@@ -40,4 +40,7 @@ module customDomain 'staticSiteCustomDomain.bicep' = {
     zoneName: zoneName
     staticWebAppResourceName: webAppName
   }
+  dependsOn:[
+    app, dnsZone
+  ]
 }
