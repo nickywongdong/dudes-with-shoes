@@ -28,6 +28,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build
+    needs: [infrastructure]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -66,7 +67,6 @@ jobs:
     name: Deploy Infrastructure
     env:
       REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
-    needs: [build]
     steps:
       - uses: actions/checkout@v3
         with:
