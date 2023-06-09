@@ -66,6 +66,7 @@ jobs:
     name: Deploy Infrastructure
     env:
       REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
+    needs: [build]
     steps:
       - uses: actions/checkout@v3
         with:
