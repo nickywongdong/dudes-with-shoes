@@ -61,6 +61,8 @@ jobs:
           if-no-files-found: error
   infrastructure:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
     name: Deploy Infrastructure
     env:
       REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
@@ -93,6 +95,8 @@ jobs:
           failOnStdErr: false
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
     needs: [build, infrastructure]
     steps:
       - uses: actions/download-artifact@v3
