@@ -33,7 +33,7 @@ module dnsZone 'dnsZone.bicep' = {
   }
 }
 
-module customDomain 'staticSiteCustomDomain.bicep' = {
+/* module customDomain 'staticSiteCustomDomain.bicep' = {
   name: 'custom-domain-${deploymentId}'
   scope: rg
   params: {
@@ -43,4 +43,4 @@ module customDomain 'staticSiteCustomDomain.bicep' = {
   dependsOn:[
     app, dnsZone
   ]
-}
+} */
