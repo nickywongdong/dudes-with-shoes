@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public float TimeToLive = 5f;
+
+    private void Update()
+    {
+        Destroy(gameObject, TimeToLive);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         var HitTransform = collision.transform;
