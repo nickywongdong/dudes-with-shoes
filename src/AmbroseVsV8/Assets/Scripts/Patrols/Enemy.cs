@@ -45,24 +45,26 @@ public class Enemy : MonoBehaviour
 
     public bool CanSeePlayer()
     {
-        if (Player != null)
+
+        if (Player != null && Vector3.Distance(transform.position, Player.transform.position) < SightDistance)
         {
-            if (Vector3.Distance(transform.position, Player.transform.position) < SightDistance)
+            var TargetDirection = Player.transform.position - transform.position - (Vector3.up * EyeHeight);
+            return DoesEnemyRaycastHitPlayer(TargetDirection);
+        }
+        
+        return false;
+    }
+
+    bool DoesEnemyRaycastHitPlayer(Vector3 TargetDirection)
+    {
+        float AngleToPlayer = Vector3.Angle(TargetDirection, transform.forward);
+        if (AngleToPlayer >= -FieldOfView && AngleToPlayer <= FieldOfView)
+        {
+            var Ray = new Ray((transform.position + Vector3.up * EyeHeight), TargetDirection);
+            if (Physics.Raycast(Ray, out var HitInfo, SightDistance) && HitInfo.transform.gameObject == Player)
             {
-                Vector3 TargetDirection = Player.transform.position - transform.position - (Vector3.up * EyeHeight);
-                float AngleToPlayer = Vector3.Angle(TargetDirection, transform.forward);
-                if (AngleToPlayer >= -FieldOfView && AngleToPlayer <= FieldOfView)
-                {
-                    var Ray = new Ray((transform.position + Vector3.up * EyeHeight), TargetDirection);
-                    if (Physics.Raycast(Ray, out var HitInfo, SightDistance))
-                    {
-                        if (HitInfo.transform.gameObject == Player)
-                        {
-                            Debug.DrawRay(Ray.origin, Ray.direction * SightDistance);
-                            return true;
-                        }
-                    }
-                }
+                Debug.DrawRay(Ray.origin, Ray.direction * SightDistance);
+                return true;
             }
         }
         return false;

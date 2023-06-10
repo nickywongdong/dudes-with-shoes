@@ -5,7 +5,7 @@ public class AttackState : BaseState
     float MoveTimer;
     float LoserPlayerTimer;
     float ShotTimer;
-    readonly float _bulletVelocity = 40f;
+    readonly float _bulletVelocity = 100f;
 
     public override void Enter()
     {
@@ -17,9 +17,8 @@ public class AttackState : BaseState
 
     public void Shoot()
     {
-        Debug.Log("Shooting");
         var GunBarrel = Enemy.GunBarrel;
-        var Bullet = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), GunBarrel.position, Enemy.transform.rotation);
+        var Bullet = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Bullet"), GunBarrel.transform);
         var ShootDirection = (Enemy.transform.position - GunBarrel.transform.position).normalized;
         //Bullet.GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * ShootDirection * 40;
         Bullet.GetComponent<Rigidbody>().velocity = ShootDirection * _bulletVelocity;
