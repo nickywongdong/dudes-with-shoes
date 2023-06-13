@@ -60,7 +60,8 @@ public class PlayerAttackManager : MonoBehaviour
     {
         if (Input.GetAxis("Mouse X") < 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
         {
-            CombatActions[CombatMove]
+            CombatActions[CombatMove][nameof(Attacks.SwingRight)].Invoke();
+            Debug.Log("Swinging Right");
         }
         else if (Input.GetAxis("Mouse X") > 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
         {
