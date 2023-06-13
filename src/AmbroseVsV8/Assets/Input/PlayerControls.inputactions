@@ -1,0 +1,34 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "CombatControls",
+            "id": "7a5321ed-cc5b-456d-945a-ee389c1b749b",
+            "actions": [
+                {
+                    "name": "SwingDown",
+                    "type": "Button",
+                    "id": "086fc286-3eed-4936-a10b-fe8a8d58e3df",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9bf2dced-4c4c-4d9b-9360-135a19673da9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwingDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
