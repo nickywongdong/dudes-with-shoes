@@ -26,37 +26,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             ""name"": ""CombatControls"",
             ""id"": ""7a5321ed-cc5b-456d-945a-ee389c1b749b"",
-            ""actions"": [
-                {
-                    ""name"": ""SwingDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""086fc286-3eed-4936-a10b-fe8a8d58e3df"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""9bf2dced-4c4c-4d9b-9360-135a19673da9"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwingDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": []
 }");
         // CombatControls
         m_CombatControls = asset.FindActionMap("CombatControls", throwIfNotFound: true);
-        m_CombatControls_SwingDown = m_CombatControls.FindAction("SwingDown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -118,12 +95,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // CombatControls
     private readonly InputActionMap m_CombatControls;
     private List<ICombatControlsActions> m_CombatControlsActionsCallbackInterfaces = new List<ICombatControlsActions>();
-    private readonly InputAction m_CombatControls_SwingDown;
     public struct CombatControlsActions
     {
         private @PlayerControls m_Wrapper;
         public CombatControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SwingDown => m_Wrapper.m_CombatControls_SwingDown;
         public InputActionMap Get() { return m_Wrapper.m_CombatControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -133,16 +108,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CombatControlsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CombatControlsActionsCallbackInterfaces.Add(instance);
-            @SwingDown.started += instance.OnSwingDown;
-            @SwingDown.performed += instance.OnSwingDown;
-            @SwingDown.canceled += instance.OnSwingDown;
         }
 
         private void UnregisterCallbacks(ICombatControlsActions instance)
         {
-            @SwingDown.started -= instance.OnSwingDown;
-            @SwingDown.performed -= instance.OnSwingDown;
-            @SwingDown.canceled -= instance.OnSwingDown;
         }
 
         public void RemoveCallbacks(ICombatControlsActions instance)
@@ -162,6 +131,5 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public CombatControlsActions @CombatControls => new CombatControlsActions(this);
     public interface ICombatControlsActions
     {
-        void OnSwingDown(InputAction.CallbackContext context);
     }
 }

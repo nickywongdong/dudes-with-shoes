@@ -63,12 +63,12 @@ public class PlayerAttackManager : MonoBehaviour
     {
         if (CombatType == CombatType.Attack)
         {
-            Debug.Log($"Performing Attack Move: {AttackMove}");
+            //Debug.Log($"Performing Attack Move: {AttackMove}");
             playerAnimator.SetTrigger(AttackMove);
         }
         else if (CombatType == CombatType.Block)
         {
-            Debug.Log($"Performing Block Move: {BlockMove}");
+            //Debug.Log($"Performing Block Move: {BlockMove}");
             playerAnimator.SetTrigger(BlockMove);
         }
         else
