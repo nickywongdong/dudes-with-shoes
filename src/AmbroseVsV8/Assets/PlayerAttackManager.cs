@@ -1,11 +1,16 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttackManager : MonoBehaviour
 {
-    public static Animator playerAnimator;
-    enum Attacks
+    public Animator playerAnimator;
+
+    enum CombatType
+    {
+        Attack,
+        Block
+    }
+    enum Attack
     {
         SwingRight,
         SwingLeft,
@@ -13,7 +18,7 @@ public class PlayerAttackManager : MonoBehaviour
         Stab
     }
 
-    enum Blocks
+    enum Block
     {
         BlockRight,
         BlockLeft,
@@ -21,70 +26,54 @@ public class PlayerAttackManager : MonoBehaviour
         BlockUpper
     }
 
-    readonly Dictionary<string, Dictionary<string, Action>> CombatActions = new()
-    {
-        { 
-            "Attack", new Dictionary<string, Action>
-            {
-                { nameof(Attacks.SwingRight) , () => playerAnimator.SetTrigger(nameof(Attacks.SwingRight)) },
-                { nameof(Attacks.SwingLeft),    () => playerAnimator.SetTrigger(nameof(Attacks.SwingLeft)) },
-                { nameof(Attacks.SwingDown),    () => playerAnimator.SetTrigger(nameof(Attacks.SwingDown)) },
-                { nameof(Attacks.Stab),         () => playerAnimator.SetTrigger(nameof(Attacks.Stab)) }
-            }
-        },
-        {
-            "Block", new Dictionary<string, Action>
-            {
-                { nameof(Blocks.BlockRight),    () => playerAnimator.SetTrigger(nameof(Blocks.BlockRight)) },
-                { nameof(Blocks.BlockLeft),     () => playerAnimator.SetTrigger(nameof(Blocks.BlockLeft)) },
-                { nameof(Blocks.BlockLower),    () => playerAnimator.SetTrigger(nameof(Blocks.BlockLower)) },
-                { nameof(Blocks.BlockUpper),    () => playerAnimator.SetTrigger(nameof(Blocks.BlockUpper)) }
-            }
-        }
-    };
-
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            DirectionCheck("Attacking");
+            DirectionCheck(CombatType.Attack);
         }
-        else if ( Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1))
         {
-            DirectionCheck("Blocking");
+            DirectionCheck(CombatType.Block);
         }
     }
 
-    void DirectionCheck(string CombatMove)
+    void DirectionCheck(CombatType CombatType)
     {
         if (Input.GetAxis("Mouse X") < 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
         {
-            CombatActions[CombatMove][nameof(Attacks.SwingRight)].Invoke();
-            Debug.Log("Swinging Right");
+            PerformAction(CombatType, nameof(Attack.SwingRight), nameof(Block.BlockLeft));
         }
         else if (Input.GetAxis("Mouse X") > 0 && Input.GetAxis("Mouse Y") < 0.15f && Input.GetAxis("Mouse Y") > -0.15f)
         {
-            playerAnimator.SetTrigger(nameof(Attacks.SwingLeft));
-            Debug.Log("Swinging Left");
+            PerformAction(CombatType, nameof(Attack.SwingLeft), nameof(Block.BlockRight));
         }
         else if (Input.GetAxis("Mouse Y") > 0 && Input.GetAxis("Mouse X") < 0.15f && Input.GetAxis("Mouse X") > -0.15f)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                playerAnimator.SetTrigger(nameof(Attacks.SwingDown));
-                Debug.Log("Swinging Down");
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                playerAnimator.SetTrigger(nameof(Blocks.BlockUpper));
-                Debug.Log("Block Upper");
-            }
+            PerformAction(CombatType, nameof(Attack.SwingDown), nameof(Block.BlockUpper));
         }
         else if (Input.GetAxis("Mouse Y") < 0 && Input.GetAxis("Mouse X") < 0.15f && Input.GetAxis("Mouse X") > -0.15f)
         {
-            playerAnimator.SetTrigger(nameof(Attacks.Stab));
-            Debug.Log("Stabbing");
+            PerformAction(CombatType, nameof(Attack.Stab), nameof(Block.BlockLower));
+        }
+    }
+
+    void PerformAction(CombatType CombatType, string AttackMove, string BlockMove)
+    {
+        if (CombatType == CombatType.Attack)
+        {
+            Debug.Log($"Performing Attack Move: {AttackMove}");
+            playerAnimator.SetTrigger(AttackMove);
+        }
+        else if (CombatType == CombatType.Block)
+        {
+            Debug.Log($"Performing Block Move: {BlockMove}");
+            playerAnimator.SetTrigger(BlockMove);
+        }
+        else
+        {
+            Debug.LogError($"Unsupported Combat Type: ${CombatType}");
         }
     }
 }
