@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerAttackManager : MonoBehaviour
 {
+    [SerializeField]
+    int selectedWeapon;
     public Animator playerAnimator;
 
     enum CombatType
@@ -26,9 +28,12 @@ public class PlayerAttackManager : MonoBehaviour
         BlockUpper
     }
 
+
     // Update is called once per frame
     void Update()
     {
+        selectedWeapon = FindObjectOfType<WeaponSwitching>().SelectedWeapon;
+
         if (Input.GetMouseButtonDown(0))
         {
             DirectionCheck(CombatType.Attack);

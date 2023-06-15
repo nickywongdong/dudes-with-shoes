@@ -8,6 +8,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] GameObject _playerGameObject;
     public void Setup(bool didIDoGood)
     {
+        Time.timeScale = 0;
         if (didIDoGood == true)
         {
             gameObject.GetComponent<GameOver>().GetComponentInChildren<TextMeshProUGUI>().text = "you did it.";
@@ -26,6 +27,7 @@ public class GameOver : MonoBehaviour
 
     public void RestartButton()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Game");
     }
 }

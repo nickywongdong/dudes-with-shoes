@@ -740,7 +740,7 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6736829016046070424}
         m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: HealDamage
         m_Mode: 4
@@ -1723,7 +1723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb449d3520b53104784deded5442b5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerGameObject: {fileID: 0}
+  _playerGameObject: {fileID: 1680966959922416301}
 --- !u!1 &299829949
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,7 +3142,7 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6736829016046070424}
         m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: TakeDamage
         m_Mode: 4
@@ -31735,6 +31735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5089377802185174717, guid: 2339a98b3f2db0343a99672b0ed89f8a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8089016635420101878, guid: 2339a98b3f2db0343a99672b0ed89f8a,
         type: 3}
       propertyPath: Overlay
@@ -31748,8 +31753,62 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4251713439009152803, guid: 2339a98b3f2db0343a99672b0ed89f8a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3088033860069551187}
+    - targetCorrespondingSourceObject: {fileID: 4251713439009152803, guid: 2339a98b3f2db0343a99672b0ed89f8a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3088033860069551188}
   m_SourcePrefab: {fileID: 100100000, guid: 2339a98b3f2db0343a99672b0ed89f8a, type: 3}
+--- !u!1 &1602979473688213837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4251713439009152803, guid: 2339a98b3f2db0343a99672b0ed89f8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1574308402010937809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1680966959922416301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4209754066824244419, guid: 2339a98b3f2db0343a99672b0ed89f8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1574308402010937809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3088033860069551187
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602979473688213837}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1, y: 7.18, z: 0.8}
+  m_Center: {x: -0.000000089406996, y: 2.4360123, z: -0.00000011920927}
+--- !u!114 &3088033860069551188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602979473688213837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e75ccc2f6838946996236f1eff8358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 100
 --- !u!1001 &5741651742563435184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32072,3 +32131,15 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 956017702}
   m_SourcePrefab: {fileID: 100100000, guid: 526c380f9b59c024eab133c15e51e0fa, type: 3}
+--- !u!114 &6736829016046070424 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8089016635420101878, guid: 2339a98b3f2db0343a99672b0ed89f8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1574308402010937809}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680966959922416301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f212ffe638b00424d80fdb798daa1d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
