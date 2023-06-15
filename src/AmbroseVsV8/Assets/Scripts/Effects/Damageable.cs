@@ -5,7 +5,7 @@ public class Damageable : MonoBehaviour
     [SerializeField] float _initialHealth;
     GameObject _explosion;
     float _currentHealth;
-    [SerializeField] GameOver GameOverScreen;
+    public static event System.Action<bool> OnGameOver;
 
     private void Awake()
     {
@@ -32,6 +32,7 @@ public class Damageable : MonoBehaviour
         var _explosion = Instantiate(Resources.Load<GameObject>("Prefabs/EEEEXPLOSION"), transform.position, Quaternion.identity);
         var tag = gameObject.tag;
 
+        Debug.Log("Destroying game object");
         Destroy(gameObject);
         var explosionParticles = _explosion.GetComponent<ParticleSystem>();
         explosionParticles.Play();
@@ -40,7 +41,7 @@ public class Damageable : MonoBehaviour
 
         if (tag == "EndObjective")
         {
-            GameOverScreen.Setup(true);
+            OnGameOver?.Invoke(true);
         }
     }
 }

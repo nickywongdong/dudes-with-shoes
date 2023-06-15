@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] GameOver GameOverScreen;
+    public static event System.Action<bool> OnGameOver;
 
     float Health;
     public float MaxHealth = 100f;
@@ -15,10 +15,14 @@ public class PlayerHealth : MonoBehaviour
 
     private float DurationTimer;
 
-
+    public void ResetHealth()
+    {
+        Debug.Log($"Player health set from {Health}, to {MaxHealth}");
+        Health = MaxHealth;
+    }
     private void Start()
     {
-        Health = MaxHealth;
+        ResetHealth();
         Overlay.color = new Color(Overlay.color.r, Overlay.color.g, Overlay.color.b, 0);
     }
 
@@ -49,7 +53,8 @@ public class PlayerHealth : MonoBehaviour
         Overlay.color = new Color(Overlay.color.r, Overlay.color.g, Overlay.color.b, 1);
         if (Health <= 0)
         {
-            GameOverScreen.Setup(false);
+            Debug.Log("Invoking Game Over Action");
+            OnGameOver?.Invoke(false);
         }
     }
 

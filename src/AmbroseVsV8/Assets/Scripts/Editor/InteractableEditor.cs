@@ -1,4 +1,5 @@
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(Interactable), true)]
 public class InteractableEditor : Editor
@@ -31,6 +32,7 @@ public class InteractableEditor : Editor
             {
                 if (interactable.GetComponent<InteractionEvent>() is not null)
                 {
+                    Debug.Log("Destroying immediately");
                     DestroyImmediate(interactable.GetComponent<InteractionEvent>());
                 }
             }
